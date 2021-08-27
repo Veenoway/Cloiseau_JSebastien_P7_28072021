@@ -33,9 +33,10 @@ const Profile = ({ history }) => {
 				<div className="coloor container w-50 mt-2 mb-2">
 					{success ? <Alert /> : null}
 					<div className=" em">
-					<img src="/images/icon-left-font.png"
-								className="new"
+					<img src="/images/icon.png"
+								className=""
 								alt="post-capture"
+								width="220"
 								height="220"
 								autoFocus/>
 						<h3 className="darkBlue">Bienvenue sur votre page profile {profile.username} !</h3>
