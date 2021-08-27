@@ -27,11 +27,12 @@ if (config.use_env_variable) {
 // Remplacer les valeurs par celles souhaitées
 //_________________________________________________________________________________________//
 
-const password = pw => bcrypt.hashSync(pw, 10);
-const privilegedUser = sequelize.query(
-	`INSERT INTO Users (id,email,username,password,role,isAdmin,latent,createdAt,updatedAt)
-	VALUES (DEFAULT,"admin@hotmail.fr","Admin","${password( "Exemple@123")}","Développeur",1,1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)`
-);
+// const password = pw => bcrypt.hashSync(pw, 10);
+// const privilegedUser = sequelize.query(
+// 	`INSERT INTO Users (id,email,username,password,role,isAdmin,latent,createdAt,updatedAt)
+// 	VALUES (DEFAULT,"admin@hotmail.fr","Admin","${password( "Exemple@123")}","Développeur",1,1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)`
+// );
+
 //_________________________________________________________________________________________//
 
 fs.readdirSync(__dirname)
