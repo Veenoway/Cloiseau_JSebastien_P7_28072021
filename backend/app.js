@@ -1,0 +1,37 @@
+const express = require('express');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
+const app = express();
+const usersRoutes = require('./routes/users');
+const postsRoutes = require('./routes/posts');
+const commentsRoutes = require('./routes/comments');
+
+const path = require('path');
+
+// dotenv
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
+/*CROSS ORIGIN RESOURCE SHARING */
+app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*"); // Accès à l'API
+	res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"); // Méthodes de requêtes autorisées
+	res.setHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, PATCH, OPTIONS"); // Méthodes de requêtes autorisées
+	next();
+  });
+  
+
+/* BODY PARSER */
+app.use(bodyParser.json()); //.json est une méthode de l'objet bodyParser qui va transformer le corps des requêtes en objets JSON
+app.use(bodyParser.urlencoded({ extended: true }));
+/* HELMET */
+app.use(helmet());
+/*MULTER*/
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+// routes
+app.use('/api/users/', usersRoutes);
+app.use('/api/posts/', postsRoutes);
+app.use('/api/posts/', commentsRoutes);
+
+module.exports = app;

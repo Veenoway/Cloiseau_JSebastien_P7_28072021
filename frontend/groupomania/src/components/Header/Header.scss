@@ -1,0 +1,46 @@
+header {
+	background-color: #192947;
+	border-bottom: 2px solid #cf1c28;
+	width: 100%;
+
+	ul {
+		display: flex;
+		margin: 0;
+	}
+
+	li {
+		list-style: none;
+		padding-left: 5rem;
+	}
+	a {
+		font-size: large;
+		color: white;
+	}
+	a:hover {
+		color: #d1515a;
+		text-decoration: none;
+	}
+
+	.btn-warning {
+		margin-top: 1rem;
+	}
+	.btn-warning:hover {
+		background-color: #d1515a;
+	}
+
+	.btn-success:hover {
+		background-color: green;
+	}
+}
+.alert {
+	position: fixed;
+	width: 100%;
+}
+
+#navbarNav {
+	justify-content: flex-end;
+}
+
+.none {
+	text-decoration: none;
+}

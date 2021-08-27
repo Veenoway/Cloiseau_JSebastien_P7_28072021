@@ -1,0 +1,28 @@
+.footer {
+	display: flex;
+	justify-content: space-around;
+	align-items:center;
+	flex-direction: column;
+
+	background-color: #192947;
+	padding: 20px;
+	width: 100%;
+	border-top: 2px solid #cf1c28;
+	margin-top: 4rem;
+
+
+
+	a {
+		color:#F7F7F7;
+		font-size: 1.1rem;
+		text-decoration: none;
+	}
+}
+
+.test {
+	margin-top:8px;
+}
+
+.pad{
+	padding-bottom: 40px
+}

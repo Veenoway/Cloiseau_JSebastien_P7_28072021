@@ -1,0 +1,43 @@
+.signUp {
+	padding: 1.5rem;
+	max-width: 500px;
+	margin: auto;
+	h2 {
+		font-family: "Montserrat", sans-serif;
+		font-size: 400;
+	}
+
+	label {
+		color: black;
+	}
+	.btn {
+		margin-top: 1rem;
+	}
+
+	.error {
+		border: 2px solid red;
+	}
+	.valid {
+		border: 2px solid green;
+	}
+}
+.login {
+	max-width: 500px;
+	margin: auto;
+	margin-top: 5rem;
+	padding: 1.5rem;
+	h2 {
+		font-family: "Montserrat", sans-serif;
+		font-size: 400;
+	}
+}
+
+.margin{
+	position: relative;
+	right: 75px;
+}
+
+.marg{
+	margin-right: 70px;
+	margin-left: 30px
+}
