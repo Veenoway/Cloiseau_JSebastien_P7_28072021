@@ -40,6 +40,7 @@ const Post = () => {
 	};
 
 	const submitHandler = (e) => {
+
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append('title', newPost.title);
@@ -53,7 +54,7 @@ const Post = () => {
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
-	
+
 	const handlePost = (e) => {
 		if (e.target.name !== 'attachment') {
 			setNewPost({ ...newPost, [e.target.name]: e.target.value });

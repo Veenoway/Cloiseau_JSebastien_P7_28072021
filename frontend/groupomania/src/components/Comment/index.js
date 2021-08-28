@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import axios from "axios";
+
 import "./comments.scss";
 import { UserContext } from "../Context";
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 
 const Comment = comment => {
 	const date = new Date(comment.comment.createdAt).toLocaleString();

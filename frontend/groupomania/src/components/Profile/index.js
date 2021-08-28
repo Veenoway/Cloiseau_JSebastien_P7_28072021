@@ -32,18 +32,11 @@ const Profile = ({ history }) => {
 			{profile ? (
 				<div className="coloor container w-50 mt-2 mb-2">
 					{success ? <Alert /> : null}
-					<div className=" em">
-					<img src="/images/icon.png"
-								className=""
-								alt="post-capture"
-								width="220"
-								height="220"
-								autoFocus/>
+					<div className=" my-5 em">
 						<h3 className="darkBlue">Bienvenue sur votre page profile {profile.username} !</h3>
-						
-						<p className="pt-3 mb-4 rem">
+						<p className="pt-5 mb-4 rem">
 							 Ici vous retrouverez toutes vos informations personnelles ainsi qu'un bouton permettant la suppression de votre compte.
-							<br />
+							<br /><br />
 							Les commentaires et les posts peuvent être modérés par un administrateur.
 						</p>	
 					</div>
