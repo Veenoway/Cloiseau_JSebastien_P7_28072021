@@ -42,7 +42,7 @@ const Header = ({ history }) => {
 							<li className=" nav-item active" aria-current="true">
 								<NavLink to="/wall" className="none">
 									<HomeIcon fontSize="large" className="mt-3"/>
-									<p class="style">Acceuil</p>
+									<p className="style">Acceuil</p>
 								</NavLink>
 							</li>
 							<li className=" nav-item ">

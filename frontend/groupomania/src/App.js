@@ -12,7 +12,6 @@ import { UserContext } from "./components/Context";
 import { handleProfile } from "./axios/users";
 import "./App.css";
 const env = require("dotenv");
-
 env.config();
 
 const isMyTokenValid = () => {

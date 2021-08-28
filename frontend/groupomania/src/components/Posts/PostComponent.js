@@ -10,7 +10,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePost, match, history }) => {
-	
+
 	const date = new Date(post.createdAt).toLocaleString();
 	const [commentInput, setCommentInput] = useState(false);
 	const [comments, setComments] = useState(null);
@@ -64,10 +64,10 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 								</span>
 							</div>
 							<div className="width d-flex justify-content-center">
-								<img src={post.attachment}
+								{ post.attachment ?  <img src={post.attachment}
 								className="m-3 w-100 h-100 "
 								alt="post-capture"
-								autoFocus/></div>
+								autoFocus/> : null }</div> 
 								<h4 className="mt-2 white">{post.title}</h4>
 								<p className="card-text mb-auto mt-2 white mx-4 hem">{post.content}</p>
 								<span className=" mt-4 text-muted white">{date} 
@@ -85,7 +85,6 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 						{!post.isModerate ? (
 							<CommentIcon
 								className="icon mb-2 d-flex ml-2 mt-2"
-								color="#192947"
 								fontSize="large"
 								onClick={() => commentInput
 										? setCommentInput(false)

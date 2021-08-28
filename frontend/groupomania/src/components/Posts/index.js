@@ -5,11 +5,14 @@ import Loading from '../Loader/loader';
 import { addPost, deletePost, getPost, getPosts,moderate } from '../../axios/posts';
 import { UserContext } from '../Context';
 
+
+
+
 const Post = () => {
 	const [posts, setPosts] = useState(null);
 	const [active, setActive] = useState(false);
 	const { handleAlert } = useContext(UserContext);
-	const [newPost, setNewPost] = useState({ title: '', content: '', attachment: '' });
+	const [newPost, setNewPost] = useState({ title: '', content: '', attachment: null });
 
 	const handlePosts = () => {
 		getPosts()
@@ -26,7 +29,7 @@ const Post = () => {
 	}, [posts]);
 
 	useEffect(() => {
-		if (newPost.title !== '' && newPost.content !== '' && newPost.attachment) {
+		if (newPost.title !== '' && newPost.content !== '') {
 			setActive(true);
 		}
 	}, [newPost]);
@@ -41,14 +44,22 @@ const Post = () => {
 
 	const submitHandler = (e) => {
 
+		
 		e.preventDefault();
+		
 		const formData = new FormData();
 		formData.append('title', newPost.title);
 		formData.append('content', newPost.content);
-		formData.append('attachment', newPost.attachment, newPost.attachment.name);
+		console.log("attachment:", newPost.attachment )
+		if ( newPost.attachment !== null){
+			formData.append('attachment', newPost.attachment, newPost.attachment.name);	
+		}
+		
 
 		addPost(formData)
+		
 			.then((response) => {
+				
 				handlePosts();
 				handleAlert('success', 'Your post has been sent');
 			})
@@ -60,13 +71,11 @@ const Post = () => {
 			setNewPost({ ...newPost, [e.target.name]: e.target.value });
 		} else {
 			setNewPost({
-				...newPost,
-				attachment: e.target.files[0],
+				...newPost, attachment: e.target.files[0],
 			});
 		}
 	};
 	
-
 	const handleDeletePost = (id) => {
 		deletePost(id)
 			.then((response) => {
@@ -90,6 +99,7 @@ const Post = () => {
 
 	return (
 		<>
+	
 			{posts ? (
 				<>
 					<div className='card borderin p-4 w-100 postform '>

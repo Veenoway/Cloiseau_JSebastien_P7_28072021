@@ -18,15 +18,19 @@ exports.createPost = async (req, res) => {
 		}
 
 		// Post
-
+		
+		let attachment = null;
+		if ( req.file !== null && req.file !== undefined){
+		attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+		
+	}
 		const newPost = await models.Post.create({
 			title: req.body.title,
 			content: req.body.content,
-			attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+			attachment: attachment,
 			UserId: req.user.id,
 			isModerate: 0,
 		});
-
 		if (!newPost) {
 			throw new Error(' Sorry, missing parameters');
 		}
@@ -124,8 +128,7 @@ exports.deletePost = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		// Attachment
-		
+		// attachment
 		if (post.attachment !== null) {
 			const filename = post.attachment.split('/images')[1];
 			fs.unlink(`images/${filename}`, (error) => {
@@ -148,6 +151,7 @@ exports.deletePost = async (req, res) => {
 		} else {
 			res.status(200).json({ message: 'Post has been deleted ' });
 		}
+
 
 	} catch (error) {
 		res.status(404).json({ error: error.message });

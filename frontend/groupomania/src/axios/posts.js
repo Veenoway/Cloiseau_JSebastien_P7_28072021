@@ -17,7 +17,10 @@ export const getPost = UserId =>
 	});
 
 export const addPost = formData =>
-	axios.post(`${url}/new`, formData, {
+
+
+	axios.post(`${url}/new`, formData, { 
+		
 		headers: {
 			"Content-Type": "multipart/form-data",
 			Authorization: localStorage.getItem("token")
