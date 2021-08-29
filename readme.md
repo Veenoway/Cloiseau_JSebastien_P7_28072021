@@ -25,6 +25,10 @@ BACKEND
 
 7. Dans le terminal du backend tapez : nodemon server.js
 
+OU 
+
+Apès avoir crée la BDD sur mySQL vous pouvez importer le fichier "sauvegardeSQL.sql"
+
 FRONTEND
 
 1. Aller dans le terminal et taper : 
