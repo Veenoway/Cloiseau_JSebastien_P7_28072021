@@ -2,6 +2,8 @@ import React from "react";
 import "./Alert.scss";
 
 const Alert = ({ status, text }) => {
+	console.log(status)
+	console.log(text)
 	return (
 		<>
 			{status === "success" && text ? (

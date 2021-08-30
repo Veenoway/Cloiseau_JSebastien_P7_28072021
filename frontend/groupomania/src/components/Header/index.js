@@ -6,15 +6,19 @@ import { NavLink, withRouter } from "react-router-dom";
 import { UserContext } from "../Context";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const Header = ({ history }) => {
+const Header = ({ history }) => { 
+
 	const { profile, handleAlert, setProfile } = useContext(UserContext);
 	const token = localStorage.getItem("token");
+	
 
 	const handleLogout = () => {
 		localStorage.clear();
 		setProfile(null);
 		history.push("/");
 		handleAlert("success", "You Logout is a success");
+		console.log(history)
+		
 	};
 
 	return (

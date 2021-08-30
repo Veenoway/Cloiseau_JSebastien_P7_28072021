@@ -4,18 +4,19 @@ import { handleLogin } from "../../axios/users";
 import { NavLink, Redirect } from "react-router-dom";
 import { UserContext } from "../Context";
 
-const LogIn = () => {
+const LogIn = () => { // Fonction de connexion
+
 	const [login, setLogin] = useState({ email: "", password: "" });
 	const { setProfile, handleAlert } = useContext(UserContext);
 	const [redirect, setRedirect] = useState(false);
 
-	const submitHandler = e => {
+	const submitHandler = e => { // Validation du form si les champs sont remplis
 		e.preventDefault();
-		handleLogin(login)
-			.then(res => {
-				localStorage.setItem("token", res.data.token);
-				setProfile(res.data.user);
-				setRedirect(true);
+		handleLogin(login) 
+			.then(res => { 
+				localStorage.setItem("token", res.data.token); 
+				setProfile(res.data.user);  
+				setRedirect(true); 
 			})
 			.catch(error => {
 				handleAlert("danger", error.response.data.error);
@@ -33,7 +34,7 @@ const LogIn = () => {
 						name="email"
 						id="email"
 						value={login.email}
-						onChange={e => setLogin({ ...login, email: e.target.value })}
+						onChange={e => setLogin({ ...login, email: e.target.value })} // Remplace la valeur du mail de state login
 						aria-describedby="emailHelp"
 						placeholder="Enter email"
 						autoFocus/>
@@ -45,7 +46,7 @@ const LogIn = () => {
 						name="password"
 						id="password"
 						value={login.password}
-						onChange={e => setLogin({ ...login, password: e.target.value })}
+						onChange={e => setLogin({ ...login, password: e.target.value })} // Remplace la valeur du mot de passe de state login
 						placeholder="Password"
 						autoFocus/>
 				</div>{" "}
@@ -54,11 +55,11 @@ const LogIn = () => {
 					Se connecter
 				</button>
 				<p className="my-4">Vous n'avez pas de compte ?</p>
-				<NavLink to="/"> S'inscrire</NavLink>
-			</form>
-			{redirect && <Redirect to="/myprofile" />}
+				<NavLink to="/"> S'inscrire</NavLink> 
+			</form> 
+			{redirect && <Redirect to="/myprofile" />} 
 		</>
-	);
+	); 
 };
 
 export default LogIn;

@@ -4,6 +4,7 @@ import { withRouter, Redirect, NavLink } from "react-router-dom";
 import { UserContext } from "../Context";
 
 function SignUp() {
+
 	const [signUp, setSignUp] = useState({ email: "", password: "", username: "", role: "" });
 	const { setProfile, handleAlert } = useContext(UserContext);
 	const [redirect, setRedirect] = useState(false);
@@ -37,14 +38,15 @@ function SignUp() {
 	const [usernameValid, setUsernameValid] = useState(false);
 	const [roleValid, setRoleValid] = useState(false);
 
-	const handleChange = e => {
+	
+	const handleChange = e => { // la valeur est égale à ce que l'utilisateur écrit dans l'input
 		e.preventDefault();
 		const { name, value } = e.target;
 		if (e) {
 			setSignUp({ ...signUp, [name]: value });
 		}
 
-		switch (name) {
+		switch (name) { 
 			case "email":
 				email_regex.test(value) ? setEmailValid(true) : setEmailValid(false);
 				break;
@@ -71,7 +73,7 @@ function SignUp() {
 	return (
 		<>
 			<div className="container my-4">
-				<form className="signUp form-row" onSubmit={submitHandler}>
+				<form className="signUp form-row" onSubmit={submitHandler} >
 					<h2 className="my-5">Bienvenue sur le réseau social de Groupomania !</h2>
 					<label htmlFor="email" >Adresse Mail</label>
 					<input type="email"
@@ -113,11 +115,11 @@ function SignUp() {
 							id="role"
 							value={signUp.role}
 							onChange={handleChange}
-							placeholder="CEO,Developer..."/>
+							placeholder="UX Designer, Développeur"/>
 					</div>
 
 					{emailValid && passwordValid && usernameValid && roleValid ? (
-						<button type="submit" className="btn btn-success mt-4 marg mb-2">
+						<button type="submit" className="btn btn-success mt-4 marg mb-2" >
 							S'enregistrer
 						</button>
 					) : (

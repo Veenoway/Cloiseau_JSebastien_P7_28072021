@@ -4,7 +4,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import BlockIcon from '@material-ui/icons/Block';
 import Comment from "../Comment";
 import { UserContext } from "../Context";
-import { handleNewCom, handleComs, } from "../../axios/comment";
+import { handleNewCom, handleComs, handleDeleteComs } from "../../axios/comment";
 import Loading from "../Loader/loader";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
@@ -21,10 +21,10 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 	const { profile, handleAlert } = useContext(UserContext);
 	
 
-	const handleNewComment = e => {
-		handleNewCom(post, newComment)
+	const handleNewComment = e => {  // Post un nouveau post
+		handleNewCom(post, newComment) 
 			.then(response => {
-				setNewComment("");
+				setNewComment(""); 
 				handleComments();
 				handleAlert("success", response.data.message);
 				
@@ -32,29 +32,19 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 			.catch(error => handleAlert("danger", error.response.data.error));
 	};
 
-	const handleComment = e => {
+	const handleComment = e => { // comments = value de l'input
 		setNewComment({ comments: e.target.value });
 		return
 	};
 
-	const handleComments = () => {
+	const handleComments = () => { // Afficher tout coms
 		handleComs(post)
 			.then(response => {
-				setComments(response.data.message);
+				setComments(response.data.message); // SetComment = tout les coms
 				return
 			})
 			.catch(error => handleAlert("danger", error.response.data.error));
 	};
-
-	useEffect(() => {
-		if (match.params.UserId) {
-			handlePostsByUserId(match.params.UserId);
-		}
-	}, [match.params.UserId]);
-
-	
-
-	
 
 	return (
 		<>
