@@ -3,7 +3,6 @@ import './Post.scss';
 import PostComponent from './PostComponent';
 import Loading from '../Loader/loader';
 import { addPost, deletePost, getPost, getPosts,moderate, } from '../../axios/posts';
-
 import { UserContext } from '../Context';
 
 
@@ -36,7 +35,7 @@ const Post = () => {
 	}, [posts]);
 
 	useEffect(() => { // Si le post contient un titre et un content ALORS on active le bouton de validation tant que newPost change
-		if (newPost.title !== '' && newPost.content !== '') {
+		if (newPost.title !== '' && newPost.content !== '' || newPost.title !== '' && newPost.content !== '' && newPost.attachment ) {
 			setActive(true); 
 		}
 	}, [newPost]);
@@ -71,8 +70,8 @@ const Post = () => {
 	};
 
 	const handlePost = (e) => { 
-		if (e.target.name !== 'attachment') {
-			setNewPost({ ...newPost, [e.target.name]: e.target.value }); // S'il n'y a pas d'image 
+		if (e.target.name !== 'attachment') { // S'il n'y a pas d'image 
+			setNewPost({ ...newPost, [e.target.name]: e.target.value }); 
 		} else {
 			setNewPost({
 				...newPost, attachment: e.target.files[0], // S'il ya une image 
@@ -102,8 +101,12 @@ const Post = () => {
 	};
 
 	const handleReset = () => { // Permet de reset les values du form
-		setNewPost({ title:'', content: '', attachment: null })
+		setNewPost({ title:'', content: '', attachment: null, })
+		setActive(false)
 	  };
+
+	 
+	
 
 	return (
 		<>
@@ -138,7 +141,7 @@ const Post = () => {
 									name='content'/>
 								<div className="d-flex justify-content-space-around align-items-center">
 									<label className='attachment' htmlFor='attachment'></label>
-									<input className='form-control attachment mt-4'onChange={(e) => handlePost(e)} id='attachment' name='attachment' type='file' width='30%'/>
+									<input className='form-control attachment mt-4'onChange={(e) => handlePost(e)}  id='attachment' name='attachment' type='file' width='30%' />
 									{active ? (
 									<button className='btn btn-primary w-25 ' type='submit' onclick={handleReset}>
 										Poster

@@ -4,19 +4,22 @@ import CommentIcon from '@material-ui/icons/Comment';
 import BlockIcon from '@material-ui/icons/Block';
 import Comment from "../Comment";
 import { UserContext } from "../Context";
-import { handleNewCom, handleComs } from "../../axios/comment";
+import { handleNewCom, handleComs, } from "../../axios/comment";
 import Loading from "../Loader/loader";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { modifPost} from '../../axios/posts';
 
-const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePost, match, history }) => {
 
-	const date = new Date(post.createdAt).toLocaleString();
+const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePost, match, history}) => {
+
+	const date = new Date(post.createdAt).toLocaleString(); 
 	const [commentInput, setCommentInput] = useState(false);
 	const [comments, setComments] = useState(null);
 	const [newComment, setNewComment] = useState("");
 	const postProfileId = post.UserId;
 	const { profile, handleAlert } = useContext(UserContext);
+	
 
 	const handleNewComment = e => {
 		handleNewCom(post, newComment)
@@ -24,6 +27,7 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 				setNewComment("");
 				handleComments();
 				handleAlert("success", response.data.message);
+				
 			})
 			.catch(error => handleAlert("danger", error.response.data.error));
 	};
@@ -48,6 +52,10 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 		}
 	}, [match.params.UserId]);
 
+	
+
+	
+
 	return (
 		<>
 			{profile ? (
@@ -58,16 +66,16 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 								<span onClick={() => history.push(`/wall/${postProfileId}`)}
 									className="badge rounded-pill blue seePost mt-3"
 									autoFocus>
-									{post.User.isAdmin ? <SupervisorAccountIcon className="admin mr-2"/> : null}
+									{post.User.isAdmin ? <SupervisorAccountIcon className="admin mr-2"/> : null} 
 									{post.User.username}
-									{profile.isAdmin ? ( <BlockIcon style={{ fontSize: 30 }} onClick={() => moderatePost(post.id)} className="icon ml-1" autoFocus/>) : null}
 								</span>
 							</div>
-							<div className="width d-flex justify-content-center">
+							{profile.isAdmin ? ( <BlockIcon style={{ fontSize: 30 }} onClick={() => moderatePost(post.id)} className="icon ml-1" autoFocus/>) : null}
+							<div className="width d-flex justify-content-center"> 
 								{ post.attachment ?  <img src={post.attachment}
 								className="m-3 w-100 h-100 "
 								alt="post-capture"
-								autoFocus/> : null }</div> 
+								autoFocus/> : null }</div> 					
 								<h4 className="mt-2 white">{post.title}</h4>
 								<p className="card-text mb-auto mt-2 white mx-4 hem">{post.content}</p>
 								<span className=" mt-4 text-muted white">{date} 
@@ -89,8 +97,8 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 								onClick={() => commentInput
 										? setCommentInput(false)
 										: setCommentInput(true) + handleComments(post.id)
-								}
-							/>
+								} 
+							/> 
 						) : (
 							<p style={{ color: "#cf1c28" }}>
 								Vous ne pouvez pas ajouter de commentaire, ce post a été modéré
@@ -125,6 +133,7 @@ const PostComponent = ({ post, handlePostsByUserId, moderatePost, handleDeletePo
 												autoFocus>
 													Envoyer
 											</button>
+											
 										)}
 									</div>
 								</div>
