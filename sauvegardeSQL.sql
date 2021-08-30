@@ -30,14 +30,19 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `postId` (`postId`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9466 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table groupomania_development.comments : ~3 rows (environ)
+-- Listage des données de la table groupomania_development.comments : ~8 rows (environ)
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 INSERT INTO `comments` (`id`, `userId`, `postId`, `comments`, `createdAt`, `updatedAt`) VALUES
-	(1, 1, 1, 'Test !', '2021-08-26 23:52:41', '2021-08-26 23:52:41'),
-	(3, 3, 3, 'Any coms', '2021-08-26 23:55:26', '2021-08-26 23:55:26'),
-	(4, 3, 4, 'Peut être ajouter un .env pour masquer les infos de connection à la BDD. Ensuite push le tout sur Github', '2021-08-27 01:34:40', '2021-08-27 01:34:40');
+	(9455, 1, 106, 'Test de commentaire', '2021-08-30 02:04:22', '2021-08-30 02:04:22'),
+	(9456, 1, 115, 'test', '2021-08-30 02:08:52', '2021-08-30 02:08:52'),
+	(9457, 1, 108, 'modo', '2021-08-30 02:16:19', '2021-08-30 02:16:19'),
+	(9458, 1, 114, 'test', '2021-08-30 02:21:40', '2021-08-30 02:21:40'),
+	(9459, 1, 106, 'test', '2021-08-30 02:27:15', '2021-08-30 02:27:15'),
+	(9460, 1, 107, 'test', '2021-08-30 02:27:36', '2021-08-30 02:27:36'),
+	(9464, 1, 117, 'Tout fonctionne ?!', '2021-08-30 02:29:15', '2021-08-30 02:29:15'),
+	(9465, 1, 117, 'Super !', '2021-08-30 02:33:12', '2021-08-30 02:33:12');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 
 -- Listage de la structure de la table groupomania_development. posts
@@ -53,15 +58,17 @@ CREATE TABLE IF NOT EXISTS `posts` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table groupomania_development.posts : ~4 rows (environ)
+-- Listage des données de la table groupomania_development.posts : ~6 rows (environ)
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 INSERT INTO `posts` (`id`, `userId`, `title`, `content`, `attachment`, `isModerate`, `createdAt`, `updatedAt`) VALUES
-	(1, 2, 'Salut à tous !', 'Dites nous quelques choses...', 'http://localhost:3000/images/happy-person-11.gif.gif', 0, '2021-08-26 22:37:45', '2021-08-26 22:37:45'),
-	(3, 1, 'Mise en page terminé !', 'Tout le scss est en place :D', 'http://localhost:3000/images/mrw-reaction.gif.gif', 0, '2021-08-26 23:52:17', '2021-08-27 10:55:36'),
-	(4, 3, 'Bonjour ! ', 'Amélioration de l\'aspect visuel de l\'app', 'http://localhost:3000/images/5fdad3b89e15137929899ad5a84e1ded.gif.gif', 0, '2021-08-27 00:42:14', '2021-08-27 00:42:14'),
-	(7, 1, 'New post', 'Test', 'http://localhost:3000/images/176.png.png', 0, '2021-08-27 11:07:24', '2021-08-27 11:07:24');
+	(106, 1, 'Premier post du site', 'Pour la cinquième fois', NULL, 0, '2021-08-30 02:04:13', '2021-08-30 02:04:13'),
+	(107, 1, 'Deuxième test avec image', 'Test', 'http://localhost:3000/images/geek.jpg.jpg', 0, '2021-08-30 02:04:45', '2021-08-30 02:04:45'),
+	(108, 1, 'Bonjour à tous ! ', ':) ', 'http://localhost:3000/images/happy-person-18.gif.gif', 1, '2021-08-30 02:05:16', '2021-08-30 02:16:31'),
+	(114, 1, 'Groupomania v0.1.0', 'Première version du site présenté', 'http://localhost:3000/images/happy-person-11.gif.gif', 0, '2021-08-30 02:08:01', '2021-08-30 02:08:01'),
+	(115, 1, 'Deuxième post de texte', 'Text', NULL, 0, '2021-08-30 02:08:29', '2021-08-30 02:16:29'),
+	(117, 17, 'New Post ', 'Dites nous quelque chose..', 'http://localhost:3000/images/Joueur_du_grenier.jpg.jpg', 0, '2021-08-30 02:28:23', '2021-08-30 02:34:46');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 
 -- Listage de la structure de la table groupomania_development. sequelizemeta
@@ -91,15 +98,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table groupomania_development.users : ~16 rows (environ)
+-- Listage des données de la table groupomania_development.users : ~8 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `isAdmin`, `latent`, `createdAt`, `updatedAt`) VALUES
 	(1, 'admin@hotmail.fr', 'Admin', '$2b$10$5flEXjiN.A22TYK7yjo9v.b5wbxLZLZWMq7Kky0..xFBxbKgCu6t2', 'Développeur', 1, 1, '2021-08-26 22:35:39', '2021-08-26 22:35:39'),
 	(2, 'jeremy@hotmail.fr', 'Jeremy', '$2b$10$g/rVsxHfGPSXI2QD/5uZgOM6Y8HyBZgEOnDqfjyX6yz5k90MeDMdy', 'UX Designer', 0, 1, '2021-08-26 22:37:09', '2021-08-26 22:37:09'),
-	(3, 'nathan@hotmail.fr', 'Nathan', '$2b$10$7PQdox02CTwq4PLUoq8cGuFqWEGWMvs6EQb62YqRSZ.2HxelNnCwi', 'Developper', 0, 1, '2021-08-26 22:38:35', '2021-08-26 22:38:35'),
-	(4, 'veeno@hotmail.fr', 'Veeno', '$2b$10$AhQeKjTU2poTtFsV6VxgSewS6.pnuwJQHxahG3zSwXfOr0vSnVhRS', 'Developper', 0, 1, '2021-08-26 22:40:50', '2021-08-26 22:40:50');
+	(3, 'nathan@hotmail.fr', 'Nathan', '$2b$10$7PQdox02CTwq4PLUoq8cGuFqWEGWMvs6EQb62YqRSZ.2HxelNnCwi', 'Developper', 0, 0, '2021-08-26 22:38:35', '2021-08-29 17:41:09'),
+	(4, 'veeno@hotmail.fr', 'Veeno', '$2b$10$AhQeKjTU2poTtFsV6VxgSewS6.pnuwJQHxahG3zSwXfOr0vSnVhRS', 'Developper', 0, 1, '2021-08-26 22:40:50', '2021-08-26 22:40:50'),
+	(17, 'newOne@hotmail.fr', 'JC', '$2b$10$niBBzAKM4gyJfHAvdUo9Re4U0WmGLXt43vTna4I1QyuzpBIDvzgIW', 'dev', 0, 1, '2021-08-28 15:31:10', '2021-08-28 15:31:10'),
+	(18, 'test@hotmail.fr', 'Veeno', '$2b$10$7CSYLrcBzSTg5eYMowvyMeNp17y7hrrdVpIJyxHbzTW8zZwuMUi3q', 'none', 0, 1, '2021-08-28 16:24:14', '2021-08-28 16:24:14'),
+	(19, 'test123@hotmail.fr', 'test', '$2b$10$pdmLKvDzUeXPxY.1hdEuAOLdjG0pYSrb.GAjhOK3XG01b4okw8s/K', 'testeur', 0, 1, '2021-08-30 01:06:07', '2021-08-30 01:06:07'),
+	(20, 'newtest@hotmail.fr', 'admin', '$2b$10$f/wuFg597KtIDXNUbs35W.byMDwo94W4c8bEZee1xA97g/dROCMdm', 'ux', 0, 0, '2021-08-30 02:09:40', '2021-08-30 02:09:50');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
