@@ -48,7 +48,7 @@ exports.getComments = async (req, res) => {
 	}
 };
 
-// future project
+// Futur projet
 
 exports.deleteComment = async (req, res) => {
 	try {
@@ -76,5 +76,4 @@ exports.deleteComment = async (req, res) => {
 		res.status(400).json({ error: error.message });
 	}
 };
-// UPDATE PROJECT FOR FUTURE
-exports.answerComment = async (req, es) => {};
+
