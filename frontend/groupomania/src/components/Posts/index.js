@@ -2,108 +2,117 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Post.scss';
 import PostComponent from './PostComponent';
 import Loading from '../Loader/loader';
-import { addPost, deletePost, getPost, getPosts,moderate } from '../../axios/posts';
+import { addPost, deletePost, getPost, getPosts,moderate, } from '../../axios/posts';
+
 import { UserContext } from '../Context';
 
 
 
 
-const Post = () => {
-	const [posts, setPosts] = useState(null);
+const Post = () => { 
+
+	// HOOK
+
+	const [posts, setPosts] = useState(null); 
 	const [active, setActive] = useState(false);
 	const { handleAlert } = useContext(UserContext);
 	const [newPost, setNewPost] = useState({ title: '', content: '', attachment: null });
+	
 
-	const handlePosts = () => {
+	
+
+	const handlePosts = () => { // On récupère les posts et on envoie les donnée 
 		getPosts()
 			.then((response) => {
-				setPosts(response.data);
+				setPosts(response.data); // Afficher les posts présents
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
 
-	useEffect(() => {
+	useEffect(() => { // Tant que des posts existe on les affiches
 		if (!posts) {
 			handlePosts();
 		}
 	}, [posts]);
 
-	useEffect(() => {
+	useEffect(() => { // Si le post contient un titre et un content ALORS on active le bouton de validation tant que newPost change
 		if (newPost.title !== '' && newPost.content !== '') {
-			setActive(true);
+			setActive(true); 
 		}
 	}, [newPost]);
 
-	const handlePostsByUserId = (UserId) => {
-		getPost(UserId)
+	const handlePostsByUserId = (UserId) => { // Récupération des posts d'une personne
+		getPost(UserId) // On récupère l'id de l'utilisateurs
 			.then((response) => {
-				setPosts(response.data);
+				setPosts(response.data); // On affiche ses posts
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
 
-	const submitHandler = (e) => {
+	const submitHandler = (e) => { // On crée un ensemble de clé valeurs représentant les champs des forms et leurs valeurs 
 
-		
 		e.preventDefault();
-		
 		const formData = new FormData();
-		formData.append('title', newPost.title);
+		formData.append('title', newPost.title); 
 		formData.append('content', newPost.content);
-		console.log("attachment:", newPost.attachment )
-		if ( newPost.attachment !== null){
+
+		if ( newPost.attachment !== null){ // Si l'utilisateur met une image
 			formData.append('attachment', newPost.attachment, newPost.attachment.name);	
 		}
 		
 
-		addPost(formData)
-		
+		addPost(formData) // On post formData 
 			.then((response) => {
-				
-				handlePosts();
+				handlePosts(); // Affiche les posts
 				handleAlert('success', 'Your post has been sent');
+				handleReset()
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
 
-	const handlePost = (e) => {
+	const handlePost = (e) => { 
 		if (e.target.name !== 'attachment') {
-			setNewPost({ ...newPost, [e.target.name]: e.target.value });
+			setNewPost({ ...newPost, [e.target.name]: e.target.value }); // S'il n'y a pas d'image 
 		} else {
 			setNewPost({
-				...newPost, attachment: e.target.files[0],
+				...newPost, attachment: e.target.files[0], // S'il ya une image 
 			});
 		}
 	};
 	
-	const handleDeletePost = (id) => {
-		deletePost(id)
+	const handleDeletePost = (id) => { // Suppression d'un post
+		deletePost(id) // On supprime le post avec son id 
 			.then((response) => {
-				
-				const data = posts.filter((post) => post.id !== id);
-				setPosts(data);
+				const data = posts.filter((post) => post.id !== id); // On supprime si les id concorde 
+				setPosts(data); // On réaffiche les posts avec une nouvelle valeur pour posts
 				handleAlert('success', response.data.message);
 			})
 
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
 
-	const moderatePost = (id) => {
-		moderate(id)
+
+	const moderatePost = (id) => { // Moderation du post 
+		moderate(id) // Si isModerate = 0 alors on le passe à un // Si isModerate = 1 alors on le passe à zero le post que l'on souhaite avec le params id (id du post)
 			.then((response) => {
-				handlePosts();
+				handlePosts(); // On affiches les posts
 				handleAlert('success', response.data.message);
 			})
 			.catch((error) => handleAlert('danger', error.response.data.error));
 	};
+
+	const handleReset = () => { // Permet de reset les values du form
+		setNewPost({ title:'', content: '', attachment: null })
+	  };
 
 	return (
 		<>
 	
-			{posts ? (
+			{posts ? ( 
 				<>
 					<div className='card borderin p-4 w-100 postform '>
-						<form onSubmit={submitHandler}
+						<form id="reset" onSubmit={submitHandler}
+							onReset={handleReset}
 							method='post'
 							encType='multipart/form-data'
 							className='postForm'>
@@ -131,11 +140,11 @@ const Post = () => {
 									<label className='attachment' htmlFor='attachment'></label>
 									<input className='form-control attachment mt-4'onChange={(e) => handlePost(e)} id='attachment' name='attachment' type='file' width='30%'/>
 									{active ? (
-									<button className='btn btn-primary w-25 ' type='submit'>
+									<button className='btn btn-primary w-25 ' type='submit' onclick={handleReset}>
 										Poster
 									</button>
 									) : (
-									<button disabled className='btn btn-dark w-25 ' type='submit'>
+									<button disabled className='btn btn-dark w-25 ' type='submit' onclick={handleReset}>
 										Poster
 									</button>)}
 								</div>
